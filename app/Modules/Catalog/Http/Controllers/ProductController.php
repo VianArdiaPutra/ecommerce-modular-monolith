@@ -14,10 +14,10 @@ class ProductController extends Controller
     {
         $products = Product::with('categories')
             ->where('is_active', true)
-            ->when($request->query('q'), fn($query, $term) => $query->where('name', 'like', "%{$term}%"))
-            ->when($request->query('category'), fn($query, $slug) => $query->whereHas(
+            ->when($request->query('q'), fn ($query, $term) => $query->where('name', 'like', "%{$term}%"))
+            ->when($request->query('category'), fn ($query, $slug) => $query->whereHas(
                 'categories',
-                fn($c) => $c->where('slug', $slug)
+                fn ($c) => $c->where('slug', $slug)
             ))
             ->orderBy('name')
             ->get();

@@ -18,7 +18,7 @@ class CatalogSeeder extends Seeder
             'Olahraga',
             'Buku',
             'Aksesoris',
-        ])->map(fn(string $name) => Category::firstOrCreate(
+        ])->map(fn (string $name) => Category::firstOrCreate(
             ['slug' => Str::slug($name)],
             ['name' => $name],
         ));

@@ -97,10 +97,10 @@ class ProductController extends Controller
         $i = 2;
 
         while (Product::where('slug', $slug)
-            ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
+            ->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))
             ->exists()
         ) {
-            $slug = $base . '-' . $i++;
+            $slug = $base.'-'.$i++;
         }
 
         return $slug;

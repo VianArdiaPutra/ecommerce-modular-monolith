@@ -30,7 +30,7 @@ class CheckoutService
 
         $order = DB::transaction(function () use ($cart, $customerId, $address) {
             $order = Order::create([
-                'order_number' => 'ORD-' . now()->format('Ymd') . '-' . strtoupper(Str::random(6)),
+                'order_number' => 'ORD-'.now()->format('Ymd').'-'.strtoupper(Str::random(6)),
                 'customer_id' => $customerId,
                 'shipping_name' => $address->recipientName,
                 'shipping_phone' => $address->phone,
@@ -68,7 +68,7 @@ class CheckoutService
             $order->id,
             $customerId,
             (float) $order->total_amount,
-            $order->items->map(fn($i) => [
+            $order->items->map(fn ($i) => [
                 'product_id' => $i->product_id,
                 'quantity' => $i->quantity,
             ])->all(),

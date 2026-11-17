@@ -16,7 +16,7 @@ Route::middleware('web')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::get('/akun', fn() => view('customer::account'))->name('account');
+        Route::get('/akun', fn () => view('customer::account'))->name('account');
 
         Route::middleware('role:customer')->group(function () {
             Route::get('/akun/alamat/baru', [AddressController::class, 'create'])->name('address.create');
@@ -24,7 +24,7 @@ Route::middleware('web')->group(function () {
         });
 
         Route::middleware('role:admin')->group(function () {
-            Route::get('/admin', fn() => view('customer::admin'))->name('admin.dashboard');
+            Route::get('/admin', fn () => view('customer::admin'))->name('admin.dashboard');
         });
     });
 });

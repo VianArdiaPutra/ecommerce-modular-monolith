@@ -14,7 +14,7 @@ class CustomerFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'phone' => '08' . fake()->numerify('##########'),
+            'phone' => '08'.fake()->numerify('##########'),
         ];
     }
 }

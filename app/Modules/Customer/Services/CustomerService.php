@@ -19,7 +19,7 @@ class CustomerService implements CustomerServiceInterface
         return Address::where('customer_id', $customerId)
             ->orderByDesc('is_default')
             ->get()
-            ->map(fn(Address $address) => $this->toSnapshot($address))
+            ->map(fn (Address $address) => $this->toSnapshot($address))
             ->all();
     }
 

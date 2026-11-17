@@ -16,7 +16,7 @@ class AddressFactory extends Factory
             'customer_id' => Customer::factory(),
             'label' => fake()->randomElement(['Rumah', 'Kantor', 'Kos']),
             'recipient_name' => fake()->name(),
-            'phone' => '08' . fake()->numerify('##########'),
+            'phone' => '08'.fake()->numerify('##########'),
             'full_address' => fake('id_ID')->streetAddress(),
             'city' => fake('id_ID')->city(),
             'postal_code' => fake()->numerify('#####'),
