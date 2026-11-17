@@ -1,0 +1,269 @@
+/* ==========================================================
+   KLIMAQU - login/register: foto layar penuh diam,
+   teks brand dan kartu form bertukar sisi di atasnya
+   ========================================================== */
+
+.auth {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    overflow: hidden;
+    background: var(--ink);
+}
+
+/* Latar foto: menempel di layar, tidak ikut bergerak */
+.auth::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+        linear-gradient(
+            to bottom,
+            rgba(46, 33, 24, 0.66) 0%,
+            rgba(46, 33, 24, 0.52) 45%,
+            rgba(46, 33, 24, 0.66) 100%
+        ),
+        var(--auth-photo);
+    background-size: cover;
+    background-position: center 72%;
+    background-repeat: no-repeat;
+}
+
+/* ---------- Panel teks (kiri saat login) ---------- */
+.auth-hero {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px 64px;
+    color: #fff;
+}
+
+.auth-hero-brand {
+    font-family: var(--font-head);
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
+}
+
+.auth-hero-texts {
+    display: grid;
+    max-width: 540px;
+}
+
+.auth-hero-text {
+    grid-area: 1 / 1;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease,
+        visibility 0.5s;
+}
+
+.auth-hero-text h1 {
+    color: #fff;
+    font-size: clamp(2.6rem, 4.2vw, 3.9rem);
+    line-height: 1.12;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+}
+
+.auth-hero-text p {
+    font-size: 1.12rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.94);
+    max-width: 450px;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+}
+
+.auth-hero-slogan {
+    margin: 0;
+    font-family: var(--font-head);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Panel kartu (kanan saat login) ---------- */
+.auth-form-panel {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.auth-forms {
+    display: grid;
+    width: 100%;
+    max-width: 440px;
+}
+
+.auth-form {
+    grid-area: 1 / 1;
+    align-self: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s;
+}
+
+.auth-card {
+    background: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 18px;
+    padding: 32px 34px 28px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+.auth-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+}
+
+.auth-card .auth-lead {
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+}
+
+.auth-card .btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px 20px;
+}
+
+.auth-card .alert {
+    margin: 14px 0 4px;
+}
+
+.auth-switch {
+    margin: 18px 0 0;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+}
+
+.auth-switch a {
+    font-weight: 700;
+    color: var(--wood);
+}
+
+.auth-switch a:hover {
+    color: var(--wood-dark);
+}
+
+.auth-back {
+    margin: 20px 0 0;
+    font-size: 0.92rem;
+}
+
+.auth-back a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+.auth-back a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* ---------- Kolom password + ikon mata ---------- */
+.pw-field {
+    position: relative;
+    margin-top: 6px;
+}
+
+.pw-field input {
+    margin: 0;
+    padding-right: 48px;
+}
+
+.pw-toggle {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        color 0.2s;
+}
+
+.pw-toggle:hover {
+    background: var(--wood-soft);
+    color: var(--wood-dark);
+}
+
+.pw-toggle:focus-visible {
+    outline: 2px solid var(--olive);
+    outline-offset: 1px;
+}
+
+.pw-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Password tersembunyi = mata tertutup, terlihat = mata terbuka */
+.pw-toggle[aria-pressed="false"] .ic-open,
+.pw-toggle[aria-pressed="true"] .ic-closed {
+    display: none;
+}
+
+/* ---------- Mode aktif ---------- */
+.auth:not(.is-register) .auth-hero-text[data-for="register"],
+.auth.is-register .auth-hero-text[data-for="login"] {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+}
+
+.auth:not(.is-register) .auth-form[data-for="login"],
+.auth.is-register .auth-form[data-for="register"] {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0.3s;
+}
+
+/* ---------- Mode register: teks dan kartu bertukar tempat ---------- */
+.auth.is-register .auth-hero {
+    transform: translateX(100%);
+}
+
+.auth.is-register .auth-form-panel {
+    transform: translateX(-100%);
+}
+
+/* Animasi baru aktif setelah halaman siap (tidak beranimasi saat pertama dimuat) */
+.auth.is-ready .auth-hero,
+.auth.is-ready .auth-form-panel {
+    transition: transform 0.75s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* prefers-reduced-motion sudah mematikan animasi lewat klimaqu.css */
