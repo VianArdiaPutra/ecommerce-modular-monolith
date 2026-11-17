@@ -62,7 +62,10 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        $default = Auth::user()->isAdmin() ? route('admin.dashboard') : route('account');
+        /** @var User $user */
+        $user = Auth::user();
+
+        $default = $user->isAdmin() ? route('admin.dashboard') : route('account');
 
         return redirect()->intended($default);
     }

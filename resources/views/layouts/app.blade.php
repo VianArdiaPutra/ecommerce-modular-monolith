@@ -24,6 +24,7 @@
             display: flex;
             gap: 16px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         nav a,
@@ -41,7 +42,7 @@
         }
 
         main {
-            max-width: 720px;
+            max-width: 960px;
             margin: 32px auto;
             padding: 0 16px;
         }
@@ -59,7 +60,16 @@
             font-weight: 600;
         }
 
-        input {
+        label.radio {
+            font-weight: 400;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
             width: 100%;
             padding: 8px;
             margin-top: 4px;
@@ -67,14 +77,45 @@
             border-radius: 4px;
         }
 
+        input[type=radio] {
+            width: auto;
+            margin-right: 8px;
+        }
+
         .btn {
-            margin-top: 16px;
+            display: inline-block;
+            margin-top: 12px;
             padding: 10px 16px;
             background: #2563eb;
             color: #fff;
             border: 0;
             border-radius: 4px;
             cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-small {
+            padding: 6px 10px;
+            background: #2563eb;
+            color: #fff;
+            border: 0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-small.danger {
+            background: #dc2626;
+        }
+
+        form.inline {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            margin: 0;
+        }
+
+        form.inline input {
+            margin: 0;
         }
 
         .alert {
@@ -97,18 +138,89 @@
             margin: 0;
             padding-left: 20px;
         }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .product h3 {
+            margin: 0 0 8px;
+        }
+
+        .product a {
+            color: #111;
+            text-decoration: none;
+        }
+
+        .price {
+            font-weight: 700;
+            color: #166534;
+            margin: 8px 0;
+        }
+
+        .muted {
+            color: #6b7280;
+            font-size: .9rem;
+            margin: 4px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            font-size: .8rem;
+        }
+
+        .filter {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .filter input,
+        .filter select {
+            margin: 0;
+        }
+
+        .filter .btn {
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        table {
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 
 <body>
     <nav>
         <strong>Toko Online</strong>
+        <a href="{{ route('catalog.index') }}">Katalog</a>
         <span class="spacer"></span>
         @auth
-            <a href="{{ route('account') }}">Akun</a>
             @if (auth()->user()->isAdmin())
                 <a href="{{ route('admin.dashboard') }}">Admin</a>
+            @else
+                <a href="{{ route('cart.index') }}">Keranjang</a>
+                <a href="{{ route('orders.index') }}">Pesanan</a>
             @endif
+            <a href="{{ route('account') }}">Akun</a>
             <form method="POST" action="{{ route('logout') }}" style="margin:0">
                 @csrf
                 <button type="submit">Keluar ({{ auth()->user()->name }})</button>
