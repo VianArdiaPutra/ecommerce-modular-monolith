@@ -1,0 +1,235 @@
+/* ==========================================================
+   KLIMAQU - beranda katalog + footer lengkap
+   ========================================================== */
+
+/* ---------- Hero ---------- */
+.hero {
+    position: relative;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    padding: 0 52px;
+    margin-bottom: 36px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background-color: #f7e1cd;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(247, 225, 205, 0.92) 0%,
+            rgba(247, 225, 205, 0.6) 38%,
+            rgba(247, 225, 205, 0) 58%
+        ),
+        var(--hero-image);
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+.hero-content {
+    max-width: 440px;
+}
+
+.hero h1 {
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    line-height: 1.1;
+    margin-bottom: 14px;
+}
+
+.hero p {
+    color: var(--ink-soft);
+    font-size: 1.08rem;
+    margin-bottom: 22px;
+}
+
+.hero-search {
+    display: flex;
+    gap: 8px;
+    padding: 6px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.hero-search:focus-within {
+    box-shadow: 0 0 0 3px rgba(79, 107, 58, 0.22);
+}
+
+.hero-search input {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.hero-search input:focus {
+    box-shadow: none;
+}
+
+.hero-search .btn {
+    margin: 0;
+}
+
+/* ---------- Judul bagian ---------- */
+.section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.section-head h2,
+.section-head p {
+    margin: 0;
+}
+
+.page-header .back-link {
+    margin: 0;
+}
+
+/* ---------- Ubin kategori ---------- */
+.cat-section {
+    margin-bottom: 40px;
+}
+
+.cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+.cat-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 12px 14px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--ink);
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.cat-tile:hover {
+    border-color: var(--olive);
+    box-shadow: var(--shadow);
+    color: var(--ink);
+}
+
+.cat-tile:focus-visible {
+    outline: 3px solid rgba(79, 107, 58, 0.45);
+    outline-offset: 2px;
+}
+
+.cat-thumb {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 124px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--olive-soft);
+}
+
+.cat-grid .cat-tile:nth-child(6n + 2) .cat-thumb {
+    background: var(--wood-soft);
+}
+.cat-grid .cat-tile:nth-child(6n + 3) .cat-thumb {
+    background: #f4e7c8;
+}
+.cat-grid .cat-tile:nth-child(6n + 4) .cat-thumb {
+    background: #e3e8e0;
+}
+.cat-grid .cat-tile:nth-child(6n + 5) .cat-thumb {
+    background: #f1e6dc;
+}
+.cat-grid .cat-tile:nth-child(6n + 6) .cat-thumb {
+    background: #ece9d6;
+}
+
+.cat-thumb img {
+    width: 84%;
+    height: 84%;
+    object-fit: contain;
+}
+
+.cat-letter {
+    font-family: var(--font-head);
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(46, 33, 24, 0.5);
+}
+
+.cat-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+/* ---------- Kartu produk (bagian bawah kartu) ---------- */
+.product-stock {
+    margin: 0 0 14px;
+}
+
+.product-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.product-foot .price {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.product-foot form {
+    margin: 0;
+}
+
+.cart-round {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--olive);
+    color: #fff;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        transform 0.15s;
+}
+
+.cart-round:hover {
+    background: var(--olive-dark);
+}
+
+.cart-round:active {
+    transform: scale(0.94);
+}
+
+.cart-round:focus-visible {
+    outline: 3px solid rgba(79, 107, 58, 0.45);
+    outline-offset: 2px;
+}
+
+.cart-round svg {
+    width: 20px;
+    height: 20px;
+}

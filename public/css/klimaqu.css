@@ -79,44 +79,52 @@ p {
 
 /* ---------- Navbar ---------- */
 nav.navbar {
-    background: var(--ink);
-    color: #fff;
-    padding: 0 32px;
-    height: 64px;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    flex-wrap: wrap;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
     position: sticky;
     top: 0;
     z-index: 50;
+    background: rgba(251, 245, 236, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 nav.navbar a,
 nav.navbar button {
-    color: #f3e9dc;
+    color: var(--ink);
     text-decoration: none;
-    background: none;
-    border: 0;
-    cursor: pointer;
-    font-size: 0.98rem;
-    font-family: inherit;
-    padding: 8px 14px;
+    background: var(--card);
+    border: 1px solid var(--line);
     border-radius: 999px;
+    padding: 9px 20px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
     transition:
         background 0.2s,
+        border-color 0.2s,
         color 0.2s;
 }
 
 nav.navbar a:hover,
 nav.navbar button:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
+    background: var(--olive-soft);
+    border-color: var(--olive);
+    color: var(--ink);
 }
 
 nav.navbar a.active {
-    background: rgba(255, 255, 255, 0.16);
+    background: var(--ink);
+    border-color: var(--ink);
     color: #fff;
     font-weight: 600;
 }
@@ -126,56 +134,47 @@ nav.navbar .spacer {
 }
 
 nav.navbar a.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 12px 6px 0;
-    margin-right: 12px;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin-right: 14px;
     font-family: var(--font-head);
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #fff;
+    letter-spacing: 0.14em;
+    color: var(--ink);
 }
 
 nav.navbar a.brand:hover {
     background: none;
-}
-
-.brand-mark {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    background: var(--olive);
-    color: #fff;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    letter-spacing: 0;
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
-}
-
-nav.navbar .nav-logout {
-    background: #b8402a;
-    color: #fff;
-    font-weight: 600;
-    margin-left: 6px;
-}
-
-nav.navbar .nav-logout:hover {
-    background: #d0503a;
-    color: #fff;
+    color: var(--wood);
 }
 
 nav.navbar .nav-cta {
     background: var(--olive);
+    border-color: var(--olive);
     color: #fff;
     font-weight: 600;
 }
 
 nav.navbar .nav-cta:hover {
     background: var(--olive-dark);
+    border-color: var(--olive-dark);
+    color: #fff;
+}
+
+nav.navbar .nav-logout {
+    background: #b8402a;
+    border-color: #b8402a;
+    color: #fff;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+nav.navbar .nav-logout:hover {
+    background: #9a321f;
+    border-color: #9a321f;
+    color: #fff;
 }
 
 /* ---------- Konten ---------- */
@@ -756,4 +755,162 @@ dialog.confirm-dialog::backdrop {
         opacity: 1;
         transform: none;
     }
+}
+
+/* ---------- Lebar konten & footer ringkas ---------- */
+:root {
+    --container: 1440px;
+}
+
+main {
+    max-width: var(--container);
+    padding: 0 32px;
+}
+
+footer.site-footer.footer-slim {
+    background: var(--wood-soft);
+    border-top: 1px solid var(--line);
+    padding: 18px 0;
+    text-align: left;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+}
+
+.footer-slim-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.footer-slim-brand strong {
+    font-family: var(--font-head);
+    letter-spacing: 0.14em;
+    color: var(--ink);
+}
+
+.footer-slim-brand span {
+    margin-left: 12px;
+}
+
+.footer-slim-links {
+    display: flex;
+    gap: 4px;
+}
+
+.footer-slim-links a {
+    padding: 6px 12px;
+    border-radius: 999px;
+    color: var(--ink-soft);
+    text-decoration: none;
+}
+
+.footer-slim-links a:hover {
+    background: rgba(255, 255, 255, 0.75);
+    color: var(--ink);
+}
+
+/* ===== Menu profil (navbar) ===== */
+.navbar .profile-menu {
+    position: relative;
+}
+.navbar .profile-trigger {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    padding: 3px;
+    border: 2px solid transparent;
+    border-radius: 999px;
+}
+.navbar .profile-trigger::-webkit-details-marker {
+    display: none;
+}
+.navbar .profile-trigger:hover,
+.navbar .profile-trigger.active,
+.navbar .profile-menu[open] .profile-trigger {
+    border-color: #4f6b3a;
+}
+
+.navbar .profile-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #4f6b3a;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+}
+.navbar .profile-avatar-lg {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.navbar .profile-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    min-width: 240px;
+    padding: 8px;
+    background: #fffbf5;
+    border: 1px solid #e8dcc8;
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(46, 33, 24, 0.16);
+    z-index: 50;
+}
+.navbar .profile-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #efe4d2;
+}
+.navbar .profile-name {
+    display: block;
+    color: #2e2118;
+    font-size: 0.95rem;
+}
+.navbar .profile-role {
+    display: inline-block;
+    margin-top: 2px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: #e9eedf;
+    color: #4f6b3a;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.navbar .profile-panel .profile-item {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    box-shadow: none;
+    color: #2e2118;
+    font: inherit;
+    font-size: 0.95rem;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+.navbar .profile-panel .profile-item:hover {
+    background: #f3ead9;
+}
+.navbar .profile-panel .profile-item-danger {
+    color: #b3341f;
+}
+.navbar .profile-panel .profile-item-danger:hover {
+    background: #fbe6e1;
 }
