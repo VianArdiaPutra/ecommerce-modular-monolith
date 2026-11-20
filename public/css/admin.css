@@ -1,0 +1,96 @@
+/* ==========================================================
+   KLIMAQU - halaman admin
+   ========================================================== */
+
+.admin-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.admin-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 26px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color 0.2s;
+}
+
+.admin-tile:hover {
+    border-color: var(--olive);
+    color: var(--ink);
+}
+
+.admin-tile:focus-visible {
+    outline: 3px solid rgba(79, 107, 58, 0.45);
+    outline-offset: 2px;
+}
+
+.admin-tile h3 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.admin-tile p {
+    margin: 0;
+    color: var(--ink-soft);
+}
+
+.admin-tile .go {
+    margin-top: 12px;
+    font-weight: 700;
+    color: var(--olive-dark);
+}
+
+/* ---------- Tabel & form admin ---------- */
+.page-header .btn {
+    margin: 0;
+}
+
+.num {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.row-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.row-actions form {
+    margin: 0;
+}
+
+.cell-name {
+    font-weight: 600;
+}
+
+.field-label {
+    margin: 14px 0 0;
+    font-weight: 600;
+    font-size: 0.94rem;
+}
+
+.check-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 0 12px;
+    margin-top: 6px;
+}
+
+.check-grid label.radio {
+    margin-top: 0;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 110px;
+}

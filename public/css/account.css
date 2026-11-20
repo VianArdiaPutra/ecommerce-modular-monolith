@@ -1,0 +1,89 @@
+/* ==========================================================
+   KLIMAQU - halaman akun
+   ========================================================== */
+
+.account-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.account-layout .card + .card {
+    margin-top: 0;
+}
+
+.profile-card {
+    text-align: center;
+}
+
+.avatar-lg {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--olive);
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.profile-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+
+.profile-card .muted {
+    margin-bottom: 12px;
+    word-break: break-all;
+}
+
+.section-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.section-bar h3 {
+    margin: 0;
+}
+
+.section-bar .btn {
+    margin: 0;
+}
+
+.address-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.address-card {
+    padding: 18px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+
+.address-card.is-default {
+    border-color: var(--olive);
+    box-shadow: inset 0 0 0 1px var(--olive);
+}
+
+.address-card h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+}
+
+.address-card p {
+    margin: 0 0 4px;
+}

@@ -267,3 +267,113 @@
 }
 
 /* prefers-reduced-motion sudah mematikan animasi lewat klimaqu.css */
+
+/* ---------- Muat satu layar tanpa scroll halaman ---------- */
+.auth {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    grid-template-rows: minmax(0, 1fr);
+}
+
+.auth-hero {
+    min-height: 0;
+    padding: 40px 64px;
+}
+
+.auth-form-panel {
+    min-height: 0;
+    justify-content: flex-start;
+    overflow-y: auto;
+    padding: 24px 40px;
+    scrollbar-width: thin;
+}
+
+/* Kartu di tengah panel; kalau terlalu tinggi, panel yang digulir */
+.auth-forms {
+    margin-block: auto;
+}
+
+/* Kartu dipadatkan */
+.auth-card {
+    padding: 26px 30px 22px;
+}
+
+.auth-card h2 {
+    font-size: 1.65rem;
+    margin-bottom: 2px;
+}
+
+.auth-card .auth-lead {
+    margin-bottom: 0;
+}
+
+.auth-card label {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.auth-card input {
+    margin-top: 4px;
+    padding: 9px 12px;
+}
+
+.auth-card .pw-field {
+    margin-top: 4px;
+}
+
+.auth-card .pw-field input {
+    margin: 0;
+    padding-right: 48px;
+}
+
+.auth-card .btn {
+    margin-top: 16px;
+    padding: 11px 20px;
+}
+
+.auth-card .alert {
+    margin: 10px 0 0;
+    padding: 10px 14px;
+    font-size: 0.92rem;
+}
+
+.auth-switch {
+    margin-top: 14px;
+}
+
+.auth-back {
+    margin: 14px 0 0;
+}
+
+/* Layar pendek (laptop dengan toolbar browser): padatkan sedikit lagi */
+@media (max-height: 820px) {
+    .auth-hero {
+        padding: 28px 64px;
+    }
+
+    .auth-hero-text h1 {
+        font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+    }
+
+    .auth-card {
+        padding: 20px 28px 18px;
+    }
+
+    .auth-card label {
+        margin-top: 8px;
+    }
+
+    .auth-card input {
+        padding: 8px 12px;
+    }
+
+    .auth-card .btn {
+        margin-top: 12px;
+        padding: 10px 20px;
+    }
+
+    .auth-switch {
+        margin-top: 10px;
+    }
+}
