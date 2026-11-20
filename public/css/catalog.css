@@ -499,51 +499,175 @@
     margin: 8px 0;
 }
 
-.detail {
-    display: grid;
-    grid-template-columns: 400px 1fr;
-    gap: 36px;
-    align-items: start;
-}
-
-.detail .product-thumb.large {
-    background: var(--wood-soft);
-}
-
-.detail-info h1 {
-    margin-bottom: 10px;
-}
-
-.detail-info .price {
-    font-size: 1.7rem;
-    margin: 14px 0 6px;
-}
-
-.detail-info .desc {
-    color: var(--ink-soft);
-    line-height: 1.7;
-    margin: 14px 0;
-}
-
-.qty-row {
+/* ---------- Detail produk (gaya editorial) ---------- */
+.pd-crumb {
     display: flex;
-    gap: 12px;
-    align-items: flex-end;
-    margin-top: 18px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0 28px;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
 }
 
-.qty-row label {
+.pd-crumb a {
+    color: var(--ink-soft);
+    text-decoration: none;
+}
+
+.pd-crumb a:hover {
+    color: var(--ink);
+}
+
+.pd-crumb .current {
+    color: var(--ink);
+}
+
+.pd {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 72px;
+    align-items: start;
+    padding-bottom: 48px;
+}
+
+.pd-media .p-thumb {
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+}
+
+.pd-media .p-thumb svg {
+    width: 26%;
+}
+
+.pd-media .p-letter {
+    font-size: 8rem;
+}
+
+.pd-cat {
+    margin: 0 0 10px;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.pd-title {
+    margin: 0 0 16px;
+    font-size: clamp(2rem, 3.4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+}
+
+.pd-price {
+    margin: 0 0 8px;
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+
+.pd-info .p-stock {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.pd-desc {
+    max-width: 34em;
+    margin: 24px 0 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+.pd-buy {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.pd-buy form,
+form.pd-buy {
+    margin-bottom: 0;
+}
+
+.p-btn.lg {
+    padding: 14px 28px;
+    font-size: 0.98rem;
+}
+
+.qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.qty-stepper:focus-within {
+    border-color: var(--olive);
+    box-shadow: 0 0 0 3px rgba(79, 107, 58, 0.18);
+}
+
+.qty-stepper button {
+    width: 44px;
+    height: 48px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.qty-stepper button:hover {
+    color: var(--olive-dark);
+}
+
+.qty-stepper input {
+    width: 56px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    text-align: center;
+    font-weight: 600;
+    -moz-appearance: textfield;
+}
+
+.qty-stepper input:focus {
+    box-shadow: none;
+}
+
+.qty-stepper input::-webkit-outer-spin-button,
+.qty-stepper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
     margin: 0;
 }
 
-.qty-row .qty-field {
-    width: 110px;
+.pd-meta {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
 }
 
-.qty-row input {
-    margin: 6px 0 0;
+.pd-meta > span {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
-.qty-row .btn {
-    margin: 0;
+.pd-meta .chip-row {
+    margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+    .pd {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
 }
