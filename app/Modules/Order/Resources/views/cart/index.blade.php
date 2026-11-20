@@ -7,74 +7,80 @@
 @endpush
 
 @section('content')
-    <div class="page-header">
-        <h1>Keranjang Belanja</h1>
+    <div class="cl-title">
+        <h1>Keranjang belanja</h1>
+        @if ($items !== [])
+            <span>{{ count($items) }} produk</span>
+        @endif
     </div>
 
     @if ($items === [])
-        <div class="card empty-state">
-            <p>Keranjang masih kosong.</p>
-            <a class="btn" href="{{ route('catalog.index') }}">Lihat katalog</a>
+        <div class="cl-empty">
+            <h2>Keranjangmu masih kosong</h2>
+            <p>Temukan produk yang kamu suka di katalog.</p>
+            <a class="cl-btn cl-btn-inline" href="{{ route('catalog.index') }}">Lihat katalog</a>
         </div>
     @else
-        <div class="cart-layout">
-            <div class="card table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Produk</th>
-                            <th class="num">Harga</th>
-                            <th>Jumlah</th>
-                            <th class="num">Subtotal</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($items as $item)
-                            <tr>
-                                <td>
-                                    <div class="item-cell">
-                                        <span class="item-thumb">{{ mb_strtoupper(mb_substr($item['name'], 0, 1)) }}</span>
-                                        <span>{{ $item['name'] }}</span>
-                                    </div>
-                                </td>
-                                <td class="num">Rp {{ number_format($item['price'], 0, ',', '.') }}</td>
-                                <td>
-                                    <form method="POST" action="{{ route('cart.update', $item['product_id']) }}"
-                                        class="inline" data-qty-form="{{ $item['name'] }}">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="0"
-                                            class="qty-input" aria-label="Jumlah {{ $item['name'] }}">
-                                        <button type="submit" class="btn-small qty-ok">OK</button>
-                                    </form>
-                                </td>
-                                <td class="num">Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</td>
-                                <td class="num">
-                                    <form method="POST" action="{{ route('cart.remove', $item['product_id']) }}"
-                                        class="inline" data-confirm-delete="{{ $item['name'] }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn-small danger" type="submit">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <div class="cl-layout">
+            <section class="cl-list" aria-label="Isi keranjang">
+                <div class="cl-cols">
+                    <span>Produk</span>
+                    <span>Jumlah</span>
+                    <span class="r">Subtotal</span>
+                    <span></span>
+                </div>
 
-            <aside class="card summary">
-                <h3>Ringkasan</h3>
-                <div class="summary-row">
-                    <span>Jumlah jenis produk</span>
+                @foreach ($items as $item)
+                    <div class="cl-row">
+                        <span
+                            class="cl-thumb cl-tone-{{ $loop->index % 4 }}">{{ mb_strtoupper(mb_substr($item['name'], 0, 1)) }}</span>
+
+                        <div class="cl-name">
+                            <strong>{{ $item['name'] }}</strong>
+                            <span>Rp {{ number_format($item['price'], 0, ',', '.') }} per item</span>
+                        </div>
+
+                        <form method="POST" action="{{ route('cart.update', $item['product_id']) }}" class="cl-qty"
+                            data-qty-form="{{ $item['name'] }}">
+                            @csrf
+                            @method('PATCH')
+                            <div class="cl-stepper">
+                                <button type="button" data-step="-1" aria-label="Kurangi jumlah">&minus;</button>
+                                <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="0"
+                                    aria-label="Jumlah {{ $item['name'] }}">
+                                <button type="button" data-step="1" aria-label="Tambah jumlah">+</button>
+                            </div>
+                            <button type="submit" class="cl-ok">OK</button>
+                        </form>
+
+                        <span class="cl-sub">Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</span>
+
+                        <form method="POST" action="{{ route('cart.remove', $item['product_id']) }}" class="cl-del"
+                            data-confirm-delete="{{ $item['name'] }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="cl-remove" type="submit">Hapus</button>
+                        </form>
+                    </div>
+                @endforeach
+            </section>
+
+            <aside class="cl-summary">
+                <h2>Ringkasan</h2>
+                <div class="cl-sum-row">
+                    <span>Jenis produk</span>
                     <span>{{ count($items) }}</span>
                 </div>
-                <div class="total-box">
+                <div class="cl-sum-row">
+                    <span>Total item</span>
+                    <span>{{ collect($items)->sum('quantity') }}</span>
+                </div>
+                <div class="cl-total">
                     <span>Total</span>
                     <span>Rp {{ number_format($total, 0, ',', '.') }}</span>
                 </div>
-                <a class="btn" href="{{ route('checkout.show') }}">Lanjut ke Checkout</a>
+                <a class="cl-btn" href="{{ route('checkout.show') }}">Lanjut ke checkout</a>
+                <a class="cl-link" href="{{ route('catalog.index') }}">&larr; Lanjut belanja</a>
             </aside>
         </div>
 
@@ -136,8 +142,8 @@
                 document.querySelectorAll('form[data-confirm-delete]').forEach(function(form) {
                     form.addEventListener('submit', function(e) {
                         e.preventDefault();
-                        ask('“' + form.dataset.confirmDelete + '” akan dihapus dari keranjang.', form,
-                        null);
+                        ask('\u201C' + form.dataset.confirmDelete + '\u201D akan dihapus dari keranjang.',
+                            form, null);
                     });
                 });
 
@@ -152,11 +158,23 @@
 
                     input.addEventListener('input', sync);
 
+                    // Tombol - dan +
+                    form.querySelectorAll('[data-step]').forEach(function(btn) {
+                        btn.addEventListener('click', function() {
+                            var value = parseInt(input.value, 10);
+                            if (isNaN(value)) value = Number(input.defaultValue);
+                            value += parseInt(btn.dataset.step, 10);
+                            if (value < 0) value = 0;
+                            input.value = value;
+                            sync();
+                        });
+                    });
+
                     form.addEventListener('submit', function(e) {
                         if (input.value !== '' && Number(input.value) === 0) {
                             e.preventDefault();
-                            ask('“' + form.dataset.qtyForm +
-                                '” akan dihapus dari keranjang karena jumlahnya 0.', form,
+                            ask('\u201C' + form.dataset.qtyForm +
+                                '\u201D akan dihapus dari keranjang karena jumlahnya 0.', form,
                                 function() {
                                     input.value = input.defaultValue;
                                     sync();
