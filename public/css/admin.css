@@ -53,11 +53,6 @@
     margin: 0;
 }
 
-.num {
-    text-align: right;
-    white-space: nowrap;
-}
-
 .row-actions {
     display: flex;
     justify-content: flex-end;

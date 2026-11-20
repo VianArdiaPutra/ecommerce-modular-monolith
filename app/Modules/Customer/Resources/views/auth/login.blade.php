@@ -2,18 +2,10 @@
 
 @section('title', 'Masuk')
 
-@section('content')
-    <div class="card">
-        <h2>Masuk</h2>
-        <form method="POST" action="{{ route('login.store') }}">
-            @csrf
-            <label>Email</label>
-            <input type="email" name="email" value="{{ old('email') }}">
+@push('head')
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}?v={{ filemtime(public_path('css/auth.css')) }}">
+@endpush
 
-            <label>Password</label>
-            <input type="password" name="password">
-
-            <button class="btn" type="submit">Masuk</button>
-        </form>
-    </div>
+@section('bare')
+    @include('customer::auth._split', ['mode' => 'login'])
 @endsection

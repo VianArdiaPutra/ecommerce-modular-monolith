@@ -2,40 +2,58 @@
 
 @section('title', 'Detail Pesanan')
 
+@push('head')
+    <link rel="stylesheet" href="{{ asset('css/order.css') }}?v={{ filemtime(public_path('css/order.css')) }}">
+@endpush
+
 @section('content')
+    <a class="back-link" href="{{ route('orders.index') }}">&larr; Kembali ke daftar pesanan</a>
+
     <div class="card">
-        <h2>{{ $order->order_number }}</h2>
-        <p>Status: <span class="badge">{{ $order->status }}</span></p>
-        <p>Dikirim ke: <strong>{{ $order->shipping_name }}</strong> ({{ $order->shipping_phone }})<br>
-            {{ $order->shipping_address }}</p>
+        <div class="order-head">
+            <h1>{{ $order->order_number }}</h1>
+            <span class="badge">{{ $order->status }}</span>
+        </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Produk</th>
-                    <th>Harga Satuan</th>
-                    <th>Jumlah</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($order->items as $item)
+        <div class="order-info">
+            <h4>Dikirim ke</h4>
+            <p><strong>{{ $order->shipping_name }}</strong> ({{ $order->shipping_phone }})</p>
+            <p>{{ $order->shipping_address }}</p>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ $item->product_name }}</td>
-                        <td>Rp {{ number_format($item->unit_price, 0, ',', '.') }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
+                        <th>Produk</th>
+                        <th class="num">Harga Satuan</th>
+                        <th class="num">Jumlah</th>
+                        <th class="num">Subtotal</th>
                     </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="3" style="text-align:right">Total</th>
-                    <th>Rp {{ number_format($order->total_amount, 0, ',', '.') }}</th>
-                </tr>
-            </tfoot>
-        </table>
-
-        <p><a href="{{ route('orders.index') }}">&larr; Kembali ke daftar pesanan</a></p>
+                </thead>
+                <tbody>
+                    @foreach ($order->items as $item)
+                        <tr>
+                            <td>
+                                <div class="item-cell">
+                                    <span
+                                        class="item-thumb">{{ mb_strtoupper(mb_substr($item->product_name, 0, 1)) }}</span>
+                                    <span>{{ $item->product_name }}</span>
+                                </div>
+                            </td>
+                            <td class="num">Rp {{ number_format($item->unit_price, 0, ',', '.') }}</td>
+                            <td class="num">{{ $item->quantity }}</td>
+                            <td class="num">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+                <tfoot class="table-total">
+                    <tr>
+                        <th colspan="3" class="num">Total</th>
+                        <th class="num">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 @endsection

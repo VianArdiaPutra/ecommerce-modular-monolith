@@ -13,11 +13,6 @@
     margin-top: 0;
 }
 
-.num {
-    text-align: right;
-    white-space: nowrap;
-}
-
 /* Sel produk: kotak huruf + nama */
 .item-cell {
     display: flex;
@@ -164,4 +159,17 @@ label.radio.address-option input {
 
 form.inline.is-changed .qty-ok {
     visibility: visible;
+}
+
+/* Kotak total (ringkasan keranjang & checkout) */
+.total-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding: 16px 18px;
+    background: var(--olive-soft);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 1.15rem;
 }

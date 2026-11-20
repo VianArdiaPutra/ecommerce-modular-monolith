@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'KLIMAQU') | KLIMAQU</title>
     <link rel="stylesheet" href="{{ asset('css/klimaqu.css') }}?v={{ filemtime(public_path('css/klimaqu.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}?v={{ filemtime(public_path('css/layout.css')) }}">
     @stack('head')
 </head>
 

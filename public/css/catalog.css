@@ -233,3 +233,158 @@
     width: 20px;
     height: 20px;
 }
+
+/* ---------- Grid & kartu produk ---------- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 22px;
+}
+
+.product {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.product:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product .product-body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.product h3 {
+    margin: 0 0 6px;
+}
+
+.product a {
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.product a:hover {
+    color: var(--wood);
+}
+
+/* Pengganti foto produk: kotak warna lembut + huruf awal */
+.product-thumb {
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-head);
+    font-size: 4.2rem;
+    font-weight: 700;
+    color: rgba(46, 33, 24, 0.55);
+    background: var(--olive-soft);
+}
+
+.grid .product:nth-child(4n + 1) .product-thumb {
+    background: var(--olive-soft);
+}
+
+.grid .product:nth-child(4n + 2) .product-thumb {
+    background: var(--wood-soft);
+}
+
+.grid .product:nth-child(4n + 3) .product-thumb {
+    background: #f4e7c8;
+}
+
+.grid .product:nth-child(4n + 4) .product-thumb {
+    background: #e3e8e0;
+}
+
+.product-thumb.large {
+    font-size: 8rem;
+    border-radius: var(--radius);
+    aspect-ratio: 1 / 1;
+}
+
+.price {
+    font-weight: 700;
+    color: var(--olive-dark);
+    font-size: 1.1rem;
+    margin: 8px 0;
+}
+
+.filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+    padding: 14px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.filter input,
+.filter select {
+    margin: 0;
+}
+
+.filter .btn {
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* ---------- Detail produk ---------- */
+.detail {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 36px;
+    align-items: start;
+}
+
+.detail .product-thumb.large {
+    background: var(--wood-soft);
+}
+
+.detail-info h1 {
+    margin-bottom: 10px;
+}
+
+.detail-info .price {
+    font-size: 1.7rem;
+    margin: 14px 0 6px;
+}
+
+.detail-info .desc {
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 14px 0;
+}
+
+.qty-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    margin-top: 18px;
+}
+
+.qty-row label {
+    margin: 0;
+}
+
+.qty-row .qty-field {
+    width: 110px;
+}
+
+.qty-row input {
+    margin: 6px 0 0;
+}
+
+.qty-row .btn {
+    margin: 0;
+}
