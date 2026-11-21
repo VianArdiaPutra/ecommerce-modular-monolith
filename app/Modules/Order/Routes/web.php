@@ -16,4 +16,5 @@ Route::middleware(['web', 'auth:sanctum', 'role:customer'])->group(function () {
 
     Route::get('/pesanan', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/pesanan/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('/pesanan/{order}/berhasil', [OrderController::class, 'success'])->name('orders.success');
 });

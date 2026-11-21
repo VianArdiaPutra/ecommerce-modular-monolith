@@ -59,7 +59,14 @@
                             data-confirm-delete="{{ $item['name'] }}">
                             @csrf
                             @method('DELETE')
-                            <button class="cl-remove" type="submit">Hapus</button>
+                            <button class="cl-remove" type="submit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path
+                                        d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3" />
+                                </svg>
+                                Hapus
+                            </button>
                         </form>
                     </div>
                 @endforeach
@@ -68,12 +75,12 @@
             <aside class="cl-summary">
                 <h2>Ringkasan</h2>
                 <div class="cl-sum-row">
-                    <span>Jenis produk</span>
-                    <span>{{ count($items) }}</span>
+                    <span>Subtotal</span>
+                    <span>Rp {{ number_format($total, 0, ',', '.') }}</span>
                 </div>
                 <div class="cl-sum-row">
-                    <span>Total item</span>
-                    <span>{{ collect($items)->sum('quantity') }}</span>
+                    <span>Ongkir</span>
+                    <span class="cl-muted">Dihitung di checkout</span>
                 </div>
                 <div class="cl-total">
                     <span>Total</span>

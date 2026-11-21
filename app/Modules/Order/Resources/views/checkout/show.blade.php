@@ -7,52 +7,146 @@
 @endpush
 
 @section('content')
-    <div class="page-header">
+    @php
+        $hasAddress = $addresses !== [];
+        $defaultAddress = collect($addresses)->firstWhere('isDefault', true);
+        $selectedId = (int) old(
+            'address_id',
+            $defaultAddress ? $defaultAddress->id : ($hasAddress ? $addresses[0]->id : 0),
+        );
+    @endphp
+
+    <div class="cl-title">
         <h1>Checkout</h1>
+        <a class="od-back" href="{{ route('cart.index') }}">&larr; Kembali ke keranjang</a>
     </div>
 
-    <div class="cart-layout">
-        <div class="card">
-            <h3>Alamat Pengiriman</h3>
+    <div class="cl-layout">
+        <section>
+            <h2 class="co-head">Alamat pengiriman</h2>
 
-            @if ($addresses === [])
-                <p>Anda belum punya alamat.</p>
-                <a class="btn" href="{{ route('address.create') }}">Tambah alamat dulu</a>
+            @if (!$hasAddress)
+                <div class="co-empty">
+                    <p>Kamu belum punya alamat pengiriman.</p>
+                    <a class="cl-btn cl-btn-inline" href="{{ route('address.create') }}">Tambah alamat</a>
+                </div>
             @else
-                <form method="POST" action="{{ route('checkout.store') }}">
+                <form id="checkout-form" class="co-addrs" method="POST" action="{{ route('checkout.store') }}">
                     @csrf
                     @foreach ($addresses as $address)
-                        <label class="radio address-option">
+                        <label class="co-addr">
                             <input type="radio" name="address_id" value="{{ $address->id }}"
-                                @checked($address->isDefault || old('address_id') == $address->id)>
-                            <span>
-                                <strong>{{ $address->label }}</strong> &middot; {{ $address->recipientName }}
-                                ({{ $address->phone }})
-                                <br>
-                                <span class="muted">{{ $address->formatted() }}</span>
+                                data-label="{{ $address->label }} - {{ $address->recipientName }}"
+                                @checked($selectedId === $address->id)>
+                            <span class="co-addr-body">
+                                <span class="co-addr-top">
+                                    <strong>{{ $address->label }}</strong>
+                                    @if ($address->isDefault)
+                                        <span class="co-tag">Utama</span>
+                                    @endif
+                                </span>
+                                <span>{{ $address->recipientName }} &middot; {{ $address->phone }}</span>
+                                <span class="co-addr-text">{{ $address->formatted() }}</span>
                             </span>
                         </label>
                     @endforeach
-
-                    <div class="checkout-submit">
-                        <button class="btn" type="submit">Buat Pesanan</button>
-                    </div>
                 </form>
+                <a class="co-add-link" href="{{ route('address.create') }}">+ Tambah alamat baru</a>
             @endif
-        </div>
+        </section>
 
-        <aside class="card summary">
-            <h3>Ringkasan Pesanan</h3>
+        <aside class="cl-summary">
+            <h2>Ringkasan pesanan</h2>
             @foreach ($items as $item)
-                <div class="summary-row">
+                <div class="co-line">
                     <span>{{ $item['name'] }} &times; {{ $item['quantity'] }}</span>
                     <span>Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</span>
                 </div>
             @endforeach
-            <div class="total-box">
+            <div class="co-line">
+                <span>Subtotal</span>
+                <span>Rp {{ number_format($total, 0, ',', '.') }}</span>
+            </div>
+            <div class="co-line">
+                <span>Ongkir</span>
+                <span class="co-free">Gratis</span>
+            </div>
+            <div class="cl-total">
                 <span>Total</span>
                 <span>Rp {{ number_format($total, 0, ',', '.') }}</span>
             </div>
+
+            @if ($hasAddress)
+                <button type="button" class="cl-btn" id="place-order">Buat pesanan</button>
+            @else
+                <p class="co-note">Tambahkan alamat dulu untuk membuat pesanan.</p>
+            @endif
         </aside>
     </div>
+
+    @if ($hasAddress)
+        {{-- Dialog konfirmasi sebelum pesanan dibuat --}}
+        <dialog id="order-dialog" class="confirm-dialog" aria-labelledby="order-title">
+            <div class="confirm-body">
+                <h3 id="order-title">Buat pesanan sekarang?</h3>
+                <p>Pesanan senilai <strong>Rp {{ number_format($total, 0, ',', '.') }}</strong> akan dikirim ke
+                    <strong data-order-address></strong>.
+                </p>
+                <p>Pastikan alamat dan jumlah barang sudah benar.</p>
+                <div class="confirm-actions">
+                    <button type="button" class="btn btn-outline" data-order-cancel>Periksa lagi</button>
+                    <button type="button" class="btn" data-order-ok>Ya, buat pesanan</button>
+                </div>
+            </div>
+        </dialog>
+
+        <script>
+            (function() {
+                var form = document.getElementById('checkout-form');
+                var dialog = document.getElementById('order-dialog');
+                var openBtn = document.getElementById('place-order');
+                if (!form || !dialog || !openBtn) return;
+
+                var addrEl = dialog.querySelector('[data-order-address]');
+                var okBtn = dialog.querySelector('[data-order-ok]');
+                var cancelBtn = dialog.querySelector('[data-order-cancel]');
+
+                openBtn.addEventListener('click', function() {
+                    var checked = form.querySelector('input[name="address_id"]:checked');
+                    if (!checked) {
+                        form.querySelector('input[name="address_id"]').focus();
+                        return;
+                    }
+                    addrEl.textContent = checked.dataset.label;
+                    dialog.showModal();
+                });
+
+                cancelBtn.addEventListener('click', function() {
+                    dialog.close();
+                });
+
+                // Klik area gelap menutup dialog
+                dialog.addEventListener('click', function(e) {
+                    if (e.target === dialog) dialog.close();
+                });
+
+                // Kirim form; tombol dikunci supaya klik ganda tidak membuat dua pesanan
+                okBtn.addEventListener('click', function() {
+                    okBtn.disabled = true;
+                    okBtn.textContent = 'Memproses...';
+                    openBtn.disabled = true;
+                    form.submit();
+                });
+
+                // Tombol Back dari halaman lain: kembalikan tombol ke keadaan semula
+                window.addEventListener('pageshow', function(e) {
+                    if (e.persisted) {
+                        okBtn.disabled = false;
+                        okBtn.textContent = 'Ya, buat pesanan';
+                        openBtn.disabled = false;
+                    }
+                });
+            })();
+        </script>
+    @endif
 @endsection

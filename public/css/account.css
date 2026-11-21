@@ -87,3 +87,79 @@
 .address-card p {
     margin: 0 0 4px;
 }
+
+/* ---------- Kolom kanan & pengaturan akun ---------- */
+.account-main {
+    display: grid;
+    gap: 24px;
+    min-width: 0;
+}
+
+.ac-settings > h3 {
+    margin-bottom: 4px;
+}
+
+.ac-block {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    margin: 0;
+}
+
+.ac-block:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.ac-head h4 {
+    margin: 0 0 2px;
+    font-size: 1.05rem;
+}
+
+.ac-head p {
+    margin: 0 0 16px;
+    font-size: 0.9rem;
+}
+
+.ac-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    max-width: 760px;
+}
+
+.ac-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.ac-field input {
+    width: 100%;
+    margin: 0;
+}
+
+.ac-field input.is-invalid {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px rgba(168, 50, 31, 0.12);
+}
+
+.ac-error {
+    margin: 6px 0 0;
+    color: var(--danger);
+    font-size: 0.86rem;
+}
+
+.ac-actions {
+    margin-top: 18px;
+}
+
+.ac-actions .btn {
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .account-layout {
+        grid-template-columns: 1fr;
+    }
+}

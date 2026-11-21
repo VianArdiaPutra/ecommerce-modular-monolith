@@ -23,12 +23,22 @@ class OrderController extends Controller
 
     public function show(Request $request, int $order): View
     {
-        // Hanya pesanan milik customer yang sedang login.
-        $order = Order::with('items')
-            ->where('customer_id', $this->customerId($request))
-            ->findOrFail($order);
+        return view('order::orders.show', ['order' => $this->findOwnOrder($request, $order)]);
+    }
 
-        return view('order::orders.show', ['order' => $order]);
+    public function success(Request $request, int $order): View
+    {
+        return view('order::orders.success', ['order' => $this->findOwnOrder($request, $order)]);
+    }
+
+    /**
+     * Hanya pesanan milik customer yang sedang login.
+     */
+    private function findOwnOrder(Request $request, int $orderId): Order
+    {
+        return Order::with('items')
+            ->where('customer_id', $this->customerId($request))
+            ->findOrFail($orderId);
     }
 
     private function customerId(Request $request): int

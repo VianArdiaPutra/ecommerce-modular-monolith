@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Customer\Http\Controllers\AccountController;
 use App\Modules\Customer\Http\Controllers\AddressController;
 use App\Modules\Customer\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,15 @@ Route::middleware('web')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/akun', fn () => view('customer::account'))->name('account');
+
+        // Pengaturan akun (customer dan admin): ganti nama, email, dan password.
+        Route::patch('/akun/nama', [AccountController::class, 'updateName'])->name('account.name');
+        Route::patch('/akun/email', [AccountController::class, 'updateEmail'])
+            ->middleware('throttle:6,1')
+            ->name('account.email');
+        Route::patch('/akun/password', [AccountController::class, 'updatePassword'])
+            ->middleware('throttle:6,1')
+            ->name('account.password');
 
         Route::middleware('role:customer')->group(function () {
             Route::get('/akun/alamat/baru', [AddressController::class, 'create'])->name('address.create');

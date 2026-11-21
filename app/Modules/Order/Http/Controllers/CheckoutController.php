@@ -46,9 +46,7 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', $e->getMessage());
         }
 
-        return redirect()
-            ->route('orders.show', $order->id)
-            ->with('success', "Pesanan {$order->order_number} berhasil dibuat.");
+        return redirect()->route('orders.success', $order->id);
     }
 
     private function customerId(Request $request): int

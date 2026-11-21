@@ -302,3 +302,48 @@ dialog.confirm-dialog::backdrop {
         transform: none;
     }
 }
+
+/* ---------- Kolom cari di navbar ---------- */
+.nav-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    max-width: 400px;
+    height: 40px;
+    margin: 0 0 0 12px;
+    padding: 0 8px 0 14px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.nav-search:focus-within {
+    border-color: var(--olive);
+    box-shadow: 0 0 0 3px rgba(79, 107, 58, 0.16);
+}
+
+.nav-search svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--ink-soft);
+}
+
+.nav-search input,
+.nav-search input:focus {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    font: inherit;
+    font-size: 0.93rem;
+}
