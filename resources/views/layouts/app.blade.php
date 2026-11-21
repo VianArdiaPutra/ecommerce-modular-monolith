@@ -19,15 +19,30 @@
             <div class="nav-inner">
                 <a href="{{ route('catalog.index') }}" class="brand">KLIMAQU</a>
 
-                <form method="GET" action="{{ route('catalog.index') }}" class="nav-search" role="search">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" aria-hidden="true">
-                        <circle cx="11" cy="11" r="7" />
-                        <path d="m20 20-3.5-3.5" />
-                    </svg>
-                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari produk..."
-                        aria-label="Cari produk">
-                </form>
+                @if (request()->routeIs('catalog.*'))
+                    {{-- Katalog: cari produk, hasilnya di halaman katalog --}}
+                    <form method="GET" action="{{ route('catalog.index') }}" class="nav-search" role="search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7" />
+                            <path d="m20 20-3.5-3.5" />
+                        </svg>
+                        <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari produk..."
+                            aria-label="Cari produk">
+                    </form>
+                @elseif (request()->routeIs('admin.products.index'))
+                    {{-- Kelola produk: menyaring tabel di halaman ini (tidak pindah ke katalog) --}}
+                    <form method="GET" action="{{ route('admin.products.index') }}" class="nav-search" role="search"
+                        data-admin-search>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7" />
+                            <path d="m20 20-3.5-3.5" />
+                        </svg>
+                        <input type="text" placeholder="Cari produk di tabel..." aria-label="Cari produk di tabel"
+                            autocomplete="off">
+                    </form>
+                @endif
 
                 <span class="spacer"></span>
 

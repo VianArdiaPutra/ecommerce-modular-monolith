@@ -69,4 +69,39 @@
     </div>
 
     @include('catalog::admin._confirm-delete')
+
+    <script>
+        (function() {
+            var form = document.querySelector('[data-admin-search]');
+            var input = form ? form.querySelector('input') : null;
+            var body = document.querySelector('.card table tbody');
+            if (!form || !input || !body) return;
+
+            var rows = Array.prototype.slice.call(body.querySelectorAll('tr'));
+
+            // Baris pesan saat tidak ada yang cocok
+            var empty = document.createElement('tr');
+            empty.hidden = true;
+            empty.innerHTML = '<td colspan="6" class="muted">Produk tidak ditemukan.</td>';
+            body.appendChild(empty);
+
+            function filter() {
+                var term = input.value.trim().toLowerCase();
+                var shown = 0;
+                rows.forEach(function(row) {
+                    var cell = row.querySelector('.cell-name');
+                    var match = !term || (cell && cell.textContent.toLowerCase().indexOf(term) !== -1);
+                    row.hidden = !match;
+                    if (match) shown++;
+                });
+                empty.hidden = shown !== 0;
+            }
+
+            // Enter tidak memuat ulang halaman
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+            });
+            input.addEventListener('input', filter);
+        })();
+    </script>
 @endsection
