@@ -695,3 +695,31 @@ form.pd-buy {
     background: #ffffff;
     border: 1px solid var(--line);
 }
+
+/* ---------- Daftar kategori: tampilkan sebagian, sisanya lewat tombol ---------- */
+.cat-list:not(.is-open) .cat-row.is-extra {
+    display: none;
+}
+
+.cat-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px 0 6px;
+    border: 0;
+    background: none;
+    color: var(--olive-dark);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cat-more:hover {
+    color: var(--wood);
+}
+
+.cat-more:focus-visible {
+    outline: 3px solid rgba(79, 107, 58, 0.45);
+    outline-offset: 2px;
+}

@@ -13,6 +13,7 @@
         $user = auth()->user();
         $canBuy = $user && !$user->isAdmin();
         $limit = 8;
+        $catLimit = 6;
     @endphp
 
     @unless ($isFiltering)
@@ -32,7 +33,8 @@
                     <span>{{ $categories->count() }}</span>
                 </div>
                 @foreach ($categories as $category)
-                    <a class="cat-row" href="{{ route('catalog.index', ['category' => $category->slug]) }}">
+                    <a class="cat-row {{ $loop->iteration > $catLimit ? 'is-extra' : '' }}"
+                        href="{{ route('catalog.index', ['category' => $category->slug]) }}">
                         <span class="num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                         <span class="name">{{ $category->name }}</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -41,7 +43,27 @@
                         </svg>
                     </a>
                 @endforeach
+                @if ($categories->count() > $catLimit)
+                    <button type="button" class="cat-more" id="cat-more" aria-expanded="false">
+                        Lihat semua kategori ({{ $categories->count() }})
+                    </button>
+                @endif
             </nav>
+            <script>
+                (function() {
+                    var list = document.querySelector('.cat-list');
+                    var btn = document.getElementById('cat-more');
+                    if (!list || !btn) return;
+
+                    var closedText = btn.textContent.trim();
+
+                    btn.addEventListener('click', function() {
+                        var open = list.classList.toggle('is-open');
+                        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                        btn.textContent = open ? 'Tampilkan lebih sedikit' : closedText;
+                    });
+                })();
+            </script>
         </section>
     @else
         <section class="results-head">
