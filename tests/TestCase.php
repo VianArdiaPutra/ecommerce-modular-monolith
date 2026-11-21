@@ -15,7 +15,7 @@ abstract class TestCase extends BaseTestCase
     {
         if (config('database.default') !== 'sqlite') {
             throw new RuntimeException(
-                'Tes dihentikan: koneksi database "' . config('database.default') . '" bukan sqlite. ' .
+                'Tes dihentikan: koneksi database "'.config('database.default').'" bukan sqlite. '.
                     'Periksa phpunit.xml dan variabel lingkungan DB_*.'
             );
         }
