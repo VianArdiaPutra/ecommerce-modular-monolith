@@ -32,9 +32,8 @@
                     <span>Kategori</span>
                     <span>{{ $categories->count() }}</span>
                 </div>
-                @foreach ($categories as $category)
-                    <a class="cat-row {{ $loop->iteration > $catLimit ? 'is-extra' : '' }}"
-                        href="{{ route('catalog.index', ['category' => $category->slug]) }}">
+                @foreach ($categories->take($catLimit) as $category)
+                    <a class="cat-row" href="{{ route('catalog.index', ['category' => $category->slug]) }}">
                         <span class="num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                         <span class="name">{{ $category->name }}</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -43,12 +42,58 @@
                         </svg>
                     </a>
                 @endforeach
+
                 @if ($categories->count() > $catLimit)
-                    <button type="button" class="cat-more" id="cat-more" aria-expanded="false">
+                    <button type="button" class="cat-more" data-cat-open>
                         Lihat semua kategori ({{ $categories->count() }})
                     </button>
                 @endif
             </nav>
+
+            @if ($categories->count() > $catLimit)
+                <dialog id="cat-dialog" class="cat-dialog" aria-labelledby="cat-dialog-title">
+                    <div class="cat-dialog-head">
+                        <h2 id="cat-dialog-title">Semua kategori</h2>
+                        <button type="button" class="cat-dialog-close" data-cat-close aria-label="Tutup">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="cat-dialog-list">
+                        @foreach ($categories as $category)
+                            <a class="cd-row" href="{{ route('catalog.index', ['category' => $category->slug]) }}">
+                                <span class="cd-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                                <span class="cd-name">{{ $category->name }}</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M5 12h14M13 6l6 6-6 6" />
+                                </svg>
+                            </a>
+                        @endforeach
+                    </div>
+                </dialog>
+
+                <script>
+                    (function() {
+                        var dialog = document.getElementById('cat-dialog');
+                        var openBtn = document.querySelector('[data-cat-open]');
+                        if (!dialog || !openBtn) return;
+
+                        openBtn.addEventListener('click', function() {
+                            dialog.showModal();
+                        });
+                        dialog.querySelector('[data-cat-close]').addEventListener('click', function() {
+                            dialog.close();
+                        });
+                        // Klik area gelap di luar kotak menutup dialog (Esc sudah bawaan)
+                        dialog.addEventListener('click', function(e) {
+                            if (e.target === dialog) dialog.close();
+                        });
+                    })();
+                </script>
+            @endif
             <script>
                 (function() {
                     var list = document.querySelector('.cat-list');
@@ -78,7 +123,7 @@
 
             <div class="chip-row">
                 <a class="chip {{ request()->filled('category') ? '' : 'active' }}"
-                    href="{{ route('catalog.index', array_filter(['q' => request('q')])) }}">Semua</a>
+                    href="{{ route('catalog.index', array_filter(['q' => request('q')])) }}">Katalog</a>
                 @foreach ($categories as $category)
                     <a class="chip {{ request('category') === $category->slug ? 'active' : '' }}"
                         href="{{ route('catalog.index', array_filter(['category' => $category->slug, 'q' => request('q')])) }}">{{ $category->name }}</a>
