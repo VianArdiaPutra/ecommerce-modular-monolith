@@ -12,6 +12,7 @@
         $slug = $mainCategory ? $mainCategory->slug : 'lainnya';
         $user = auth()->user();
         $canBuy = $user && !$user->isAdmin();
+        $photo = 'images/produk/' . \Illuminate\Support\Str::slug($product->name) . '.webp';
     @endphp
 
     <nav class="pd-crumb" aria-label="Breadcrumb">
@@ -27,7 +28,11 @@
     <section class="pd">
         <div class="pd-media">
             <div class="p-thumb tone-{{ $slug }}">
-                @include('catalog::products._icon', ['slug' => $slug, 'name' => $product->name])
+                @if (file_exists(public_path($photo)))
+                    <img src="{{ asset($photo) }}" alt="{{ $product->name }}">
+                @else
+                    @include('catalog::products._icon', ['slug' => $slug, 'name' => $product->name])
+                @endif
             </div>
         </div>
 

@@ -671,3 +671,27 @@ form.pd-buy {
         gap: 32px;
     }
 }
+
+/* ---------- Foto produk (aset statis; ikon kategori jadi cadangan) ---------- */
+.p-thumb img {
+    width: 82%;
+    height: 82%;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.p-card:hover .p-thumb img {
+    transform: scale(1.05);
+}
+
+.pd-media .p-thumb img {
+    width: 86%;
+    height: 86%;
+}
+
+/* ---------- Latar seragam untuk semua kotak produk ---------- */
+.p-thumb[class*="tone-"],
+.p-thumb {
+    background: #ffffff;
+    border: 1px solid var(--line);
+}

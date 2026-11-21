@@ -870,3 +870,16 @@ button.cl-btn {
     outline: 3px solid rgba(184, 64, 42, 0.4);
     outline-offset: 2px;
 }
+
+/* Foto produk di baris keranjang dan detail pesanan */
+.cl-thumb img {
+    width: 82%;
+    height: 82%;
+    object-fit: contain;
+}
+
+/* Latar seragam untuk gambar produk di keranjang dan detail pesanan */
+.cl-thumb {
+    background: #ffffff;
+    border: 1px solid var(--line);
+}

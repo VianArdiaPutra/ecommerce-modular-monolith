@@ -32,8 +32,14 @@
 
                 @foreach ($items as $item)
                     <div class="cl-row">
-                        <span
-                            class="cl-thumb cl-tone-{{ $loop->index % 4 }}">{{ mb_strtoupper(mb_substr($item['name'], 0, 1)) }}</span>
+                        @php $photo = 'images/produk/' . \Illuminate\Support\Str::slug($item['name']) . '.webp'; @endphp
+                        <span class="cl-thumb cl-tone-{{ $loop->index % 4 }}">
+                            @if (file_exists(public_path($photo)))
+                                <img src="{{ asset($photo) }}" alt="">
+                            @else
+                                {{ mb_strtoupper(mb_substr($item['name'], 0, 1)) }}
+                            @endif
+                        </span>
 
                         <div class="cl-name">
                             <strong>{{ $item['name'] }}</strong>

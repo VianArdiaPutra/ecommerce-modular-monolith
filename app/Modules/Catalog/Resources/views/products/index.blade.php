@@ -90,12 +90,20 @@
                     $mainCategory = $product->categories->first();
                     $slug = $mainCategory ? $mainCategory->slug : 'lainnya';
                     $catNames = $product->categories->pluck('name')->join(', ');
+                    $photo = 'images/produk/' . \Illuminate\Support\Str::slug($product->name) . '.webp';
                 @endphp
                 <article class="p-card" data-name="{{ $product->name }}" data-price="{{ (int) $product->price }}"
                     data-created="{{ $product->created_at ? $product->created_at->timestamp : 0 }}">
                     <a class="p-thumb tone-{{ $slug }}" href="{{ route('catalog.show', $product) }}"
                         tabindex="-1" aria-hidden="true">
-                        @include('catalog::products._icon', ['slug' => $slug, 'name' => $product->name])
+                        @if (file_exists(public_path($photo)))
+                            <img src="{{ asset($photo) }}" alt="" loading="lazy">
+                        @else
+                            @include('catalog::products._icon', [
+                                'slug' => $slug,
+                                'name' => $product->name,
+                            ])
+                        @endif
                     </a>
 
                     <div class="p-info">
