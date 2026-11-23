@@ -71,29 +71,44 @@
 
                     <form method="POST" action="{{ route('register.store') }}">
                         @csrf
-                        <label for="reg-name">Nama</label>
-                        <input id="reg-name" type="text" name="name" autocomplete="name"
-                            value="{{ $isRegister ? old('name') : '' }}">
+                        <div class="field-grid">
+                            <div>
+                                <label for="reg-name">Nama</label>
+                                <input id="reg-name" type="text" name="name" autocomplete="name"
+                                    value="{{ $isRegister ? old('name') : '' }}">
+                            </div>
 
-                        <label for="reg-email">Email</label>
-                        <input id="reg-email" type="email" name="email" autocomplete="email"
-                            value="{{ $isRegister ? old('email') : '' }}">
+                            <div>
+                                <label for="reg-email">Email</label>
+                                <input id="reg-email" type="email" name="email" autocomplete="email"
+                                    value="{{ $isRegister ? old('email') : '' }}">
+                            </div>
 
-                        <label for="reg-phone">No. Telepon (opsional)</label>
-                        <input id="reg-phone" type="text" name="phone" autocomplete="tel"
-                            value="{{ $isRegister ? old('phone') : '' }}">
+                            <div class="span-2">
+                                <label for="reg-phone">No. Telepon (opsional)</label>
+                                <input id="reg-phone" type="text" name="phone" autocomplete="tel"
+                                    value="{{ $isRegister ? old('phone') : '' }}">
+                            </div>
 
-                        <label for="reg-password">Password</label>
-                        <div class="pw-field">
-                            <input id="reg-password" type="password" name="password" autocomplete="new-password">
-                            @include('customer::auth._pw-toggle', ['target' => 'reg-password'])
-                        </div>
+                            <div>
+                                <label for="reg-password">Password</label>
+                                <div class="pw-field">
+                                    <input id="reg-password" type="password" name="password"
+                                        autocomplete="new-password">
+                                    @include('customer::auth._pw-toggle', ['target' => 'reg-password'])
+                                </div>
+                            </div>
 
-                        <label for="reg-password-confirm">Konfirmasi Password</label>
-                        <div class="pw-field">
-                            <input id="reg-password-confirm" type="password" name="password_confirmation"
-                                autocomplete="new-password">
-                            @include('customer::auth._pw-toggle', ['target' => 'reg-password-confirm'])
+                            <div>
+                                <label for="reg-password-confirm">Konfirmasi Password</label>
+                                <div class="pw-field">
+                                    <input id="reg-password-confirm" type="password" name="password_confirmation"
+                                        autocomplete="new-password">
+                                    @include('customer::auth._pw-toggle', [
+                                        'target' => 'reg-password-confirm',
+                                    ])
+                                </div>
+                            </div>
                         </div>
 
                         <button class="btn" type="submit">Daftar</button>

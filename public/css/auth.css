@@ -377,3 +377,38 @@
         margin-top: 10px;
     }
 }
+
+/* ---------- Register: kartu lebih lebar, error ringkas, tanpa scrollbar ---------- */
+.auth-forms {
+    max-width: 580px;
+}
+
+.auth-form[data-for="login"] .auth-card {
+    max-width: 440px;
+    margin-inline: auto;
+}
+
+.auth-card .alert {
+    padding: 8px 12px;
+    margin: 10px 0 0;
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+
+.auth-card .alert strong {
+    font-size: 0.9rem;
+}
+
+.auth-card .alert ul.errors {
+    margin: 4px 0 0;
+    padding-left: 18px;
+}
+
+/* Pengaman: kalau layar sangat pendek panel tetap bisa digulir, tapi tanpa scrollbar */
+.auth-form-panel {
+    scrollbar-width: none;
+}
+
+.auth-form-panel::-webkit-scrollbar {
+    display: none;
+}
