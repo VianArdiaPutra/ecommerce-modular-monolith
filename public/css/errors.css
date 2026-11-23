@@ -1,0 +1,112 @@
+/* ==========================================================
+   KLIMAQU - halaman error (403, 404, 419, 429)
+   Semua status gagal/ditolak memakai warna merah
+   ========================================================== */
+
+.err-wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 32px;
+    text-align: center;
+}
+
+.err-brand {
+    margin: 0;
+    font-family: var(--font-head);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.err-card {
+    width: min(420px, 100%);
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow-lg);
+}
+
+/* Bagian atas: titik-titik merah dan ikon */
+.err-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 170px;
+    background-image:
+        radial-gradient(circle at 12% 22%, #d94a4a 0 7px, transparent 8px),
+        radial-gradient(circle at 26% 62%, #e98585 0 4px, transparent 5px),
+        radial-gradient(circle at 8% 78%, #d94a4a 0 10px, transparent 11px),
+        radial-gradient(circle at 34% 14%, #f1b4b4 0 5px, transparent 6px),
+        radial-gradient(circle at 20% 90%, #e98585 0 3px, transparent 4px),
+        radial-gradient(circle at 88% 18%, #d94a4a 0 8px, transparent 9px),
+        radial-gradient(circle at 74% 30%, #f1b4b4 0 4px, transparent 5px),
+        radial-gradient(circle at 92% 70%, #e98585 0 6px, transparent 7px),
+        radial-gradient(circle at 80% 88%, #d94a4a 0 4px, transparent 5px),
+        radial-gradient(circle at 66% 12%, #e98585 0 3px, transparent 4px);
+}
+
+.err-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    box-shadow:
+        0 0 0 6px #fff,
+        0 0 0 9px var(--ink),
+        0 0 0 26px var(--danger-soft);
+}
+
+.err-icon svg {
+    width: 34px;
+    height: 34px;
+}
+
+.err-body {
+    padding: 8px 36px 34px;
+}
+
+.err-body h1 {
+    margin: 0 0 4px;
+    font-size: 1.6rem;
+    color: var(--red);
+}
+
+.err-code {
+    margin: 0 0 14px;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+}
+
+.err-msg {
+    margin: 0 0 22px;
+    color: var(--ink-soft);
+}
+
+.err-body .btn {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+.err-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    text-decoration: none;
+}
+
+.err-link:hover {
+    color: var(--red);
+    text-decoration: underline;
+}
