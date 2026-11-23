@@ -63,14 +63,8 @@
                     </div>
                     <div class="cat-dialog-list">
                         @foreach ($categories as $category)
-                            <a class="cd-row" href="{{ route('catalog.index', ['category' => $category->slug]) }}">
-                                <span class="cd-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                                <span class="cd-name">{{ $category->name }}</span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M5 12h14M13 6l6 6-6 6" />
-                                </svg>
-                            </a>
+                            <a class="cd-chip"
+                                href="{{ route('catalog.index', ['category' => $category->slug]) }}">{{ $category->name }}</a>
                         @endforeach
                     </div>
                 </dialog>
