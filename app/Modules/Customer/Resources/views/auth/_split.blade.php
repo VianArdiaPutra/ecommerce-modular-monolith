@@ -84,12 +84,6 @@
                                     value="{{ $isRegister ? old('email') : '' }}">
                             </div>
 
-                            <div class="span-2">
-                                <label for="reg-phone">No. Telepon (opsional)</label>
-                                <input id="reg-phone" type="text" name="phone" autocomplete="tel"
-                                    value="{{ $isRegister ? old('phone') : '' }}">
-                            </div>
-
                             <div>
                                 <label for="reg-password">Password</label>
                                 <div class="pw-field">
