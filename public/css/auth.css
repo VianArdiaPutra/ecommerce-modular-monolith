@@ -380,7 +380,7 @@
 
 /* ---------- Register: kartu lebih lebar, error ringkas, tanpa scrollbar ---------- */
 .auth-forms {
-    max-width: 580px;
+    max-width: 440px;
 }
 
 .auth-form[data-for="login"] .auth-card {
@@ -411,4 +411,9 @@
 
 .auth-form-panel::-webkit-scrollbar {
     display: none;
+}
+
+/* Form register: satu kolom per baris */
+.auth-form[data-for="register"] .field-grid {
+    grid-template-columns: 1fr;
 }
