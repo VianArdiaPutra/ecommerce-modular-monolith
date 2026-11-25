@@ -42,7 +42,7 @@ class CheckoutController extends Controller
                 $this->customerId($request),
                 (int) $request->validated('address_id'),
             );
-        } catch (EmptyCartException | InsufficientStockException $e) {
+        } catch (EmptyCartException|InsufficientStockException $e) {
             return redirect()->route('cart.index')->with('error', $e->getMessage());
         }
 
